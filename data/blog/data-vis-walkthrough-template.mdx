@@ -1,0 +1,37 @@
+---
+title: data visualisation
+date: '2026-06-03'
+tags: ['markdown', 'code', 'data visiualization','Jupyterlite']
+draft: false
+summary: Example of a markdown file with code blocks and syntax highlighting
+---
+
+## data visualisation workflow
+
+## jupyterlite Notebook code cell sections
+
+import dependencies 
+
+most bprojects rely pre writen code libaries/moduals whether writen by the notebook 
+author or by a third party. when importing from libaries , it is commen to use aliases
+such as pd is used below as a short hand for pandas.
+
+```python
+# depemdemcy Imports 
+import pandas as pd
+import matplotlib.pyplot as plt
+import json
+from js import fetch
+```
+
+helper functions
+
+helper functions enable us to wright clean human readable code 
+
+```python
+# Helper function which uses the browser's built-in fetch API
+async def get_json(url):
+    resp = await fetch(url)
+    txt = await resp.text()
+    return json.loads(txt)
+```
