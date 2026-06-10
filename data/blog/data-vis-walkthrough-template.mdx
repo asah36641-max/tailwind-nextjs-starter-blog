@@ -11,11 +11,9 @@ summary: Example of a markdown file with code blocks and syntax highlighting
 ## JupyterLite Notebook Code Cell Sections
 
 
-Import Dependencies 🐍
+##Import Dependencies 🐍
 
-Most projects rely on pre-written code libraries/modules whether written by the Notebook
-author or by a third-party. When importing from libraries, it is common to use aliases
-such as pd is used below as a shorthand for pandas.
+
 
 ```python
 # Dependency Imports
@@ -25,9 +23,9 @@ import json
 from js import fetch
 ```
 
-Helper function(s) 🐍
+##Helper function(s) 🐍
 
-Helper function enable us to write clean human readable code.
+
 
 ```python
 # Helper function which uses the browser's built-in fetch API
@@ -35,4 +33,84 @@ async def get_json(url):
     resp = await fetch(url)
     txt = await resp.text()
     return json.loads(txt)
+```
+
+##Data Acquisition by using the helper function
+
+```python
+data = await get_json(
+    "https://api.census.gov/data/2024/acs/acs5/profile?get=group(DP02)
+    &for=us:1&key=3126302716b31a8e726329c97c3c7de143f6a403"
+)
+```
+
+##Parse the tabulation into a tidy DataFrame
+
+```python
+df = pd.DataFrame(data[1:], columns=data[0])
+
+def clean_value(x):
+    if x in [None, "", "(X)", "*****"]:
+        return pd.NA
+    return pd.to_numeric(x, errors="coerce")
+
+for col in df.columns:
+    if col not in ["GEO_ID", "NAME", "us"]:
+        df[col] = df[col].map(clean_value)
+```
+
+##Label maps
+
+```python
+labels = {
+    "DP02_0058PE": "College or graduate school",
+    "DP02_0068PE": "Bachelor's degree or higher",
+    "DP02_0072PE": "With a disability",
+    "DP02_0080PE": "Same house",
+    "DP02_0093PE": "Naturalized citizen",
+    "DP02_0125PE": "Below poverty level",
+    "DP02_0154PE": "Population in households"
+}
+```
+
+##Sort by total
+
+```python
+plot_df = []
+for var, label in labels.items():
+    if var in df.columns:
+        val = df.loc[0, var]
+        if pd.notna(val):
+            plot_df.append({"Measure": label, "Percent": float(val)})
+
+plot_df = pd.DataFrame(plot_df).sort_values("Percent", ascending=False)
+```
+
+##Prepare for Data Visualization
+
+```python
+plt.style.use("seaborn-v0_8-whitegrid")
+fig, ax = plt.subplots(figsize=(10, 6))
+
+bars = ax.barh(plot_df["Measure"], plot_df["Percent"], color="#4C78A8")
+
+ax.set_title("Selected ACS 2020–2024 DP02 National Percentages (5-Year Estimates)")
+ax.set_xlabel("Percent")
+ax.set_ylabel("")
+ax.set_xlim(0, plot_df["Percent"].max() * 1.15)
+
+for bar, value in zip(bars, plot_df["Percent"]):
+    ax.text(
+        bar.get_width() + 0.5,
+        bar.get_y() + bar.get_height() / 2,
+        f"{value:.1f}%",
+        va="center"
+    )
+```
+
+##Visualization
+
+```python
+plt.tight_layout()
+plt.show()
 ```
