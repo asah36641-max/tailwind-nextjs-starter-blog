@@ -11,7 +11,7 @@ summary: Example of a markdown file with code blocks and syntax highlighting
 ## JupyterLite Notebook Code Cell Sections
 
 
-##Import Dependencies 🐍
+## Import Dependencies 
 
 
 
@@ -23,7 +23,7 @@ import json
 from js import fetch
 ```
 
-##Helper function(s) 🐍
+## Helper function(s) 
 
 
 
@@ -35,7 +35,7 @@ async def get_json(url):
     return json.loads(txt)
 ```
 
-##Data Acquisition by using the helper function
+## Data Acquisition by using the helper function
 
 ```python
 data = await get_json(
@@ -44,7 +44,7 @@ data = await get_json(
 )
 ```
 
-##Parse the tabulation into a tidy DataFrame
+## Parse the tabulation into a tidy DataFrame
 
 ```python
 df = pd.DataFrame(data[1:], columns=data[0])
@@ -59,7 +59,7 @@ for col in df.columns:
         df[col] = df[col].map(clean_value)
 ```
 
-##Label maps
+## Label maps
 
 ```python
 labels = {
@@ -73,7 +73,7 @@ labels = {
 }
 ```
 
-##Sort by total
+## Sort by total
 
 ```python
 plot_df = []
@@ -86,7 +86,7 @@ for var, label in labels.items():
 plot_df = pd.DataFrame(plot_df).sort_values("Percent", ascending=False)
 ```
 
-##Prepare for Data Visualization
+## Prepare for Data Visualization
 
 ```python
 plt.style.use("seaborn-v0_8-whitegrid")
@@ -108,7 +108,7 @@ for bar, value in zip(bars, plot_df["Percent"]):
     )
 ```
 
-##Visualization
+## Visualization
 
 ```python
 plt.tight_layout()
