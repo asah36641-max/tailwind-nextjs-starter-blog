@@ -26,8 +26,8 @@ from js import fetch
 ```
 
 ## Helper function(s) 
-this code requests data from a url with the (get_json(url)) .  
-it does this by (resp = await fetch(url)) sending a HTTP get request
+this code requests data from a url with the (get_json(url)) .it does
+this by (resp = await fetch(url)) sending a HTTP get request
 and waiting for a response. when it gets a response (txt = await resp.text())
 it uses this to get readable text which can then be displayed.
 ```python
@@ -39,7 +39,11 @@ async def get_json(url):
 ```
 
 ## Data Acquisition by using the helper function
+this section of code calls the helper function (get_json) this makes a request the
+2020–2024 ACS 5-year Data Profile DP02. which contains data about: education, disability,
+ migration, poverty, and housing.
 
+  
 ```python
 data = await get_json(
     "https://api.census.gov/data/2024/acs/acs5/profile?get=group(DP02)
