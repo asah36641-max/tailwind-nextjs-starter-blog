@@ -104,7 +104,7 @@ plot_df = pd.DataFrame(plot_df).sort_values("Percent", ascending=False)
 
 ## Prepare for Data Visualization
 this code creates a horisontal bar chart that shows the percentages in each topic. it creates the title the grid it 
-is on along with the x and y lables.
+is on on with the x and y lables.
 ```python
 plt.style.use("seaborn-v0_8-whitegrid")
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -126,7 +126,7 @@ for bar, value in zip(bars, plot_df["Percent"]):
 ```
 
 ## Visualization
-
+displays the graph in full in jupyterlight notebook and the blog. It also makes sure to space everything properly so nothing is cut of  
 ```python
 plt.tight_layout()
 plt.show()
