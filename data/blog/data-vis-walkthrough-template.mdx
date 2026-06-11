@@ -5,7 +5,7 @@ tags: ['markdown', 'code', 'data visualization', 'JupiterLite']
 draft: false
 summary: Example of a markdown file with code blocks and syntax highlighting
 ---
-## summary and reasoning  
+## Summary and Reasoning  
 This jupyterlite notebook uses U.S. Census Bureau amarican community survey 2020–2024 data,
 which has information on education, income, employment, disability, migration, citizenship,
 poverty, and housing.  This data helps better our understanding of trends and economic conditions. 
@@ -47,7 +47,7 @@ this section of code calls the helper function (get_json) this requests the
 ```python
 data = await get_json(
     "https://api.census.gov/data/2024/acs/acs5/profile?get=group(DP02)
-    &for=us:1&key=3126302716b31a8e726329c97c3c7de143f6a403"
+    &for=us:1&key=Your-Api-Key-Here"
 )
 ```
 
