@@ -39,7 +39,7 @@ async def get_json(url):
 ```
 
 ## Data Acquisition by using the helper function
-this section of code calls the helper function (get_json) this makes a request the
+this section of code calls the helper function (get_json) this requests the
 2020–2024 ACS 5-year Data Profile DP02. which contains data about: education, disability,
  migration, poverty, and housing.
 
@@ -52,7 +52,10 @@ data = await get_json(
 ```
 
 ## Parse the tabulation into a tidy DataFrame
-
+this code first creates a dataframe that organizes the column titels and the rows data. 
+then diffines the function clean_value which replaces all of the nonsesns data with NA 
+and converts real cencus data in to numbers. then it calls the function it just diffined 
+and skips the rows and coloms that are the titel rows 
 ```python
 df = pd.DataFrame(data[1:], columns=data[0])
 
