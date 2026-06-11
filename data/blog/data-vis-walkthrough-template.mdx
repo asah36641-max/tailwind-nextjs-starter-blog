@@ -70,8 +70,8 @@ for col in df.columns:
 ```
 
 ## Label maps
-this code translates the none human readable codes to human readable names 
-the names translate to: college/graduate school completion for people 25+, 
+this code is a dictionary of translates.it translates the none human readable codes
+to human readable names the names translate to: college/graduate school completion for people 25+,
 bachelor's degree or higher for people 25+, disability prevalence for population 5+, 
 residential stability (same house one year ago), naturalized citizenship among foreign-born, 
 poverty rates, and population in households versus group quarters.
@@ -88,7 +88,9 @@ labels = {
 ```
 
 ## Sort by total
-
+first it creates an empty list plot_df. after that it goes throught every veriable in the translation dictionary 
+and checks if it exsists in the dataframe. if it does then it ads the dictionary translation to it.then it converts 
+back to a data frame and finaly sorts it by percent in decending order.
 ```python
 plot_df = []
 for var, label in labels.items():
